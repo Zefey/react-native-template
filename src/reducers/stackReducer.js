@@ -1,10 +1,10 @@
-import { Router } from '../Root';
+import { MyRouter } from '../Root';
 
 export default function StackReducer(state , action) {
     let nextState;
     switch (action.type) {
         default:
-            nextState = Router.router.getStateForAction(action, state);
+            nextState = MyRouter.router.getStateForAction(action, state);
             break;
     }
     return nextState || state;

@@ -1,12 +1,10 @@
 import React, { PureComponent } from 'react';
 import { View, Text } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
-
-import Button from '../../components/Button/Button';
-import HeaderLeft from "../../components/HeaderLeft/HeaderLeft";
-import styles from "./LoginStyles";
-import rpx from '../../utils/rpx';
 import { connect } from 'react-redux'
+
+import styles from "./LoginStyles";
+import Button from '../../components/Button/Button';
 import {login} from '../../actions/user'
 
 class Login extends PureComponent {
@@ -32,7 +30,7 @@ class Login extends PureComponent {
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <Button onPress={()=>{this.props.navigation.navigate('Main')}}>跳转</Button>
+        <Button onPress={()=>{this.props.navigation.navigate('MainTab')}}>跳转</Button>
       </SafeAreaView>
     )
   }
