@@ -1,17 +1,21 @@
 import React, { PureComponent } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text,Platform } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
+import { connect } from 'react-redux'
 
-import HeaderLeft from "../../components/HeaderLeft/HeaderLeft";
 import styles from "./HomeStyles";
+import HeaderRight from '../../components/HeaderRight/HeaderRight';
+import Iconfont from "../../components/Iconfont/Iconfont";
 import rpx from '../../utils/rpx';
 
-
-export default class Home extends PureComponent {
+class Home extends PureComponent {
+  
   static navigationOptions = props => {
     return {
       headerTitle: "Home",
-      headerLeft: <HeaderLeft onPress={()=>{props.navigation.goBack()}}/>
+      headerRight:(<HeaderRight>
+                    <Iconfont name={Platform.OS == 'android' ? 'android' : 'apple'} size={rpx(34)} />
+                  </HeaderRight>)
     }
   }
 
@@ -32,3 +36,11 @@ export default class Home extends PureComponent {
     )
   }
 }
+
+export default connect((state) => {
+  let { userReducer,stackReducer } = state;
+  return {
+      userReducer,
+      stackReducer
+  }
+})(Home)

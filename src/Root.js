@@ -15,11 +15,14 @@ import Found from "./pages/Found/Found";
 import Mine from "./pages/Mine/Mine";
   
   
-const MainTabView = createBottomTabNavigator(
+const MainTab = createBottomTabNavigator(
   {
     Home: {
       screen: createStackNavigator({
-          Home: Home
+        Home
+      },
+      {
+        headerLayoutPreset: "center"
       }),
       navigationOptions: props => {
         return {
@@ -31,9 +34,7 @@ const MainTabView = createBottomTabNavigator(
       }
     },
     Found: {
-      screen: createStackNavigator({
-          Found: Found
-      }),
+      screen: Found,
       navigationOptions: props => {
         return {
           tabBarIcon: ({ tintColor, focused }) => (
@@ -44,12 +45,9 @@ const MainTabView = createBottomTabNavigator(
       }
     },
     Mine: {
-      screen: createStackNavigator({
-          Mine: Mine
-      }),
+      screen: Mine,
       navigationOptions: props => {
         return {
-          header: null,
           tabBarIcon: ({ tintColor, focused }) => (
             <Iconfont size={20} name="user" color={tintColor}/>
           ),
@@ -59,6 +57,7 @@ const MainTabView = createBottomTabNavigator(
     }
   },
   {
+    initialRouteName:'Home',
     tabBarOptions: {
       activeTintColor: "#2860a7",
       inactiveTintColor: "#66717c"
@@ -71,21 +70,7 @@ const MainTabView = createBottomTabNavigator(
   }
 );
 
-const Main = createStackNavigator(
-  {
-    Main: MainTabView
-  },
-  {
-    headerMode: "screen",
-    navigationOptions: {
-      header: null,
-      headerLayoutPreset: "center"
-    },
-    // initialRouteName: ""
-  }
-);
-
-const InitPages = createStackNavigator(
+const AuthRouter = createStackNavigator(
   {
     Login
   },
@@ -94,15 +79,31 @@ const InitPages = createStackNavigator(
   }
 );
 
-export const Router = createAppContainer(
+
+const AppRouter = createStackNavigator(
+  {
+    MainTab,
+    Login
+  },
+  {
+    headerMode: "screen",
+    navigationOptions: {
+      header: null,
+      headerLayoutPreset: "center"
+    },
+    initialRouteName: "MainTab"
+  }
+);
+
+export const MyRouter = createAppContainer(
   createSwitchNavigator(
     {
-      InitPages,
-      Main
+      AuthRouter,
+      AppRouter
     },
     {
       backBehavior: "none",
-      // initialRouteName: "Main"
+      initialRouteName: "AuthRouter"
     },
   )
 );
@@ -110,7 +111,7 @@ export const Router = createAppContainer(
 
 class App extends PureComponent {
   render() {
-    return <Router />
+    return <MyRouter />
   }
 }
 
