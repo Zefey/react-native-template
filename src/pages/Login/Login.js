@@ -30,7 +30,7 @@ class Login extends PureComponent {
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <Button onPress={()=>{this.props.navigation.navigate('MainTab')}}>跳转</Button>
+        <Button onPress={()=>{this.props.navigation.navigate('MainTab')}}>跳转到MainTab</Button>
       </SafeAreaView>
     )
   }

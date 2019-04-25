@@ -13,6 +13,7 @@ import Login from "./pages/Login/Login";
 import Home from "./pages/Home/Home";
 import Found from "./pages/Found/Found";
 import Mine from "./pages/Mine/Mine";
+import Test from "./pages/Test/Test";
   
   
 const MainTab = createBottomTabNavigator(
@@ -83,7 +84,8 @@ const AuthRouter = createStackNavigator(
 const AppRouter = createStackNavigator(
   {
     MainTab,
-    Login
+    Login,
+    Test
   },
   {
     headerMode: "screen",

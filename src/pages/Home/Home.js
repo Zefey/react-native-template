@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 
 import styles from "./HomeStyles";
 import HeaderRight from '../../components/HeaderRight/HeaderRight';
+import Button from '../../components/Button/Button';
 import Iconfont from "../../components/Iconfont/Iconfont";
 import rpx from '../../utils/rpx';
 
@@ -31,7 +32,7 @@ class Home extends PureComponent {
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <Text>Home</Text>
+        <Button onPress={()=>{this.props.navigation.navigate('Test')}}>跳转到Test</Button>
       </SafeAreaView>
     )
   }

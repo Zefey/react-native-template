@@ -3,12 +3,18 @@ import { View, Text } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 
 import styles from "./FoundStyles";
-
+import Header from '../../components/Header/Header';
+import HeaderLeft from '../../components/HeaderLeft/HeaderLeft';
 
 export default class Found extends PureComponent {
   static navigationOptions = props => {
     return {
-      headerTitle: "Found"
+      header: (
+        <Header 
+          headerTitle='Found'
+          headerLeft={<HeaderLeft />}
+        />
+      )
     }
   }
 
