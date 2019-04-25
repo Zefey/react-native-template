@@ -6,6 +6,8 @@ export default StyleSheet.create(
     header: {
       position: "relative",
       height: rpx(88),
+      borderBottomColor: "#333",
+      borderBottomWidth: rpx(1)
     },
     headerLeft: {
       position: "absolute",
