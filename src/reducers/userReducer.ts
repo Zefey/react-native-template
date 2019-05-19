@@ -1,12 +1,12 @@
 import * as Type from '../actions/type';
-// 原始默认state
+
 const defaultState = {
   isLogin: false,
   token:''
 }
 
 
-export default (state = defaultState, action) => {
+export default (state = defaultState, action:any) => {
   switch (action.type) {
     case Type.UPDATE_USER:
       return {

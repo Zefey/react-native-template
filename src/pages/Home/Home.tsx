@@ -1,26 +1,32 @@
 import React, { PureComponent } from 'react';
 import { View, Text,Platform } from 'react-native';
-import { SafeAreaView } from 'react-navigation';
+import { SafeAreaView,NavigationScreenProps } from 'react-navigation';
 import { connect } from 'react-redux'
 
 import styles from "./HomeStyles";
+import Header from '../../components/Header/Header';
 import HeaderRight from '../../components/HeaderRight/HeaderRight';
 import Button from '../../components/Button/Button';
 import Iconfont from "../../components/Iconfont/Iconfont";
 import rpx from '../../utils/rpx';
 
-class Home extends PureComponent {
+interface Props {}
+interface State {}
+
+class Home extends PureComponent<Props & NavigationScreenProps,State> {
   
-  static navigationOptions = props => {
+  static navigationOptions = (props:any) => {
     return {
-      headerTitle: "Home",
-      headerRight:(<HeaderRight>
-                    <Iconfont name={Platform.OS == 'android' ? 'android' : 'apple'} size={rpx(34)} />
-                  </HeaderRight>)
+      header:<Header 
+              headerTitle="Home"
+              headerRight={
+              <HeaderRight>
+                <Iconfont name={Platform.OS == 'android' ? 'android' : 'apple'} size={rpx(34)} />
+              </HeaderRight>}/>
     }
   }
 
-  state = {
+  state:State = {
 
   }
 
@@ -38,7 +44,7 @@ class Home extends PureComponent {
   }
 }
 
-export default connect((state) => {
+export default connect((state:any) => {
   let { userReducer,stackReducer } = state;
   return {
       userReducer,

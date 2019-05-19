@@ -4,11 +4,18 @@ import { TouchableOpacity } from "react-native";
 import Iconfont from "../Iconfont/Iconfont";
 import rpx from "../../utils/rpx";
 
-export default class HeaderRight extends PureComponent {
+interface Props {
+  iconFontName ?: any,
+  size ?: any,
+  iconStyles ?: any,
+  children ?: any,
+  onPress ?: () => void
+}
+
+export default class HeaderRight extends PureComponent<Props> {
 
   renderChildren() {
-    let { iconFontName, size, children, iconStyles, onPress } = this.props
-
+    let { iconFontName, size, children, iconStyles } = this.props
 
     if (iconFontName) {
       children = <Iconfont name={iconFontName} size={size || rpx(34)} style={iconStyles} />

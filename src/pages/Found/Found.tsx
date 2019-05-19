@@ -1,24 +1,23 @@
 import React, { PureComponent } from 'react';
 import { View, Text } from 'react-native';
-import { SafeAreaView } from 'react-navigation';
+import { SafeAreaView,NavigationScreenProps } from 'react-navigation';
 
 import styles from "./FoundStyles";
 import Header from '../../components/Header/Header';
-import HeaderLeft from '../../components/HeaderLeft/HeaderLeft';
 
-export default class Found extends PureComponent {
-  static navigationOptions = props => {
+interface Props {}
+interface State {}
+
+export default class Found extends PureComponent<Props & NavigationScreenProps,State> {
+  static navigationOptions = () => {
     return {
       header: (
-        <Header 
-          headerTitle='Found'
-          headerLeft={<HeaderLeft />}
-        />
+        <Header headerTitle='Found'/>
       )
     }
   }
 
-  state = {
+  state:State = {
 
   }
 

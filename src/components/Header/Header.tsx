@@ -1,10 +1,19 @@
 import React, { PureComponent } from "react";
 import { View, SafeAreaView, Text } from "react-native";
 
-
 import styles from "./HeaderStyles";
 
-export default class Header extends PureComponent {
+interface Props {
+  headerStyle ?: any,
+  headerLeft ?: any,
+  headerRight ?: any,
+  bgColor ?: any,
+  headerTitleTexStyle ?: any,
+  headerTitle ?: any,
+  safeAreaViewStyle ?: any,
+}
+
+export default class Header extends PureComponent<Props> {
   render() {
     const { headerStyle, headerLeft, headerRight, bgColor, headerTitleTexStyle, headerTitle, safeAreaViewStyle } = this.props
     let _bgColor = { backgroundColor: bgColor || "#fff" }

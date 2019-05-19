@@ -1,6 +1,7 @@
 import { MyRouter } from '../Root';
 
-export default function StackReducer(state , action) {
+
+export default function StackReducer(state:any, action:any) {
     let nextState;
     switch (action.type) {
         default:
