@@ -5,11 +5,12 @@ import { SafeAreaView,NavigationScreenProps } from 'react-navigation'
 import styles from './TestStyles'
 import Header from '../../components/Header/Header';
 import HeaderLeft from '../../components/HeaderLeft/HeaderLeft'
+import { connect } from 'react-redux';
 
 interface Props {}
 interface State {}
 
-export default class Test extends PureComponent<Props & NavigationScreenProps,State> {
+class Test extends PureComponent<Props & NavigationScreenProps,State> {
   static navigationOptions = (props:any) => {
     return {
       header:<Header 
@@ -22,6 +23,10 @@ export default class Test extends PureComponent<Props & NavigationScreenProps,St
   state:State={
 
   }
+
+  componentDidMount(){
+    console.log(this.props);
+  }
   
   render() {
     return (
@@ -31,3 +36,11 @@ export default class Test extends PureComponent<Props & NavigationScreenProps,St
     )
   }
 }
+
+export default connect((state:any) => {
+  let { userReducer,stackReducer } = state;
+  return {
+      userReducer,
+      stackReducer
+  }
+})(Test)

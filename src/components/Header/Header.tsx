@@ -4,13 +4,13 @@ import { View, SafeAreaView, Text } from "react-native";
 import styles from "./HeaderStyles";
 
 interface Props {
-  headerStyle ?: any,
-  headerLeft ?: any,
-  headerRight ?: any,
-  bgColor ?: any,
-  headerTitleTexStyle ?: any,
-  headerTitle ?: any,
-  safeAreaViewStyle ?: any,
+  headerStyle ?: any;
+  headerLeft ?: any;
+  headerRight ?: any;
+  bgColor ?: any;
+  headerTitleTexStyle ?: any;
+  headerTitle ?: any;
+  safeAreaViewStyle ?: any;
 }
 
 export default class Header extends PureComponent<Props> {

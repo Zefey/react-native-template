@@ -19,10 +19,6 @@ export default class Mine extends PureComponent<Props & NavigationScreenProps,St
 
   }
 
-  componentDidMount(){
-    console.log('Mine',this.props,this.state);
-  }
-
   render() {
     return (
       <SafeAreaView style={styles.container}>

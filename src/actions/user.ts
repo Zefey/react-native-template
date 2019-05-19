@@ -1,19 +1,29 @@
 import * as Type from "./type";
 
+export interface UserState {
+  token : string;
+  username : string;
+}
+
 export const login = (data : any) => (dispatch : any) => {
-  console.log('login action',data);
+
   /**模拟异步 */
   setTimeout(() => {
+    /**模拟api返回数据 */
+    let resData : UserState = {
+      token:'asd1123asdwqe123k123asdwqe',
+      username:'Test'
+    }
     return dispatch({
       type: Type.UPDATE_USER,
-      token:'asd1123asdwqe123kl!GHJ@#(&*(#H@KL#@*#()*'
+      ...resData
     });
-  }, 1000);
+  }, 2000);
+  
 }
 
 
 export const reset = () => (dispatch : any) => {
-  console.log('reset action');
   return dispatch({
     type: Type.RESET_USER
   });

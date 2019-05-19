@@ -20,7 +20,7 @@ export default class HeaderLeft extends PureComponent<Props> {
         style={[{ height: rpx(87.4), minWidth: rpx(87.4), justifyContent: "center", alignItems: "center" },style]}
         onPress={onPress}
       >
-        <Iconfont name={iconFontName || "left"} size={size || rpx(34)} style={iconStyles}/>
+        <Iconfont name={iconFontName || "left"} size={size || rpx(48)} style={iconStyles}/>
       </TouchableOpacity>
     )
   }
