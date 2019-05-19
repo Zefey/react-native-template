@@ -21,10 +21,6 @@ export default class Found extends PureComponent<Props & NavigationScreenProps,S
 
   }
 
-  componentDidMount(){
-    console.log('Found',this.props,this.state);
-  }
-
   render() {
     return (
       <SafeAreaView style={styles.container}>

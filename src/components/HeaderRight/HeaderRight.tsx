@@ -5,11 +5,11 @@ import Iconfont from "../Iconfont/Iconfont";
 import rpx from "../../utils/rpx";
 
 interface Props {
-  iconFontName ?: any,
-  size ?: any,
-  iconStyles ?: any,
-  children ?: any,
-  onPress ?: () => void
+  iconFontName ?: any;
+  size ?: any;
+  iconStyles ?: any;
+  children ?: any;
+  onPress ?: () => void;
 }
 
 export default class HeaderRight extends PureComponent<Props> {

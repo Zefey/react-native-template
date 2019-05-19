@@ -3,22 +3,22 @@ import { TouchableOpacity, ActivityIndicator, Text } from "react-native";
 import styles from "./ButtonStyles";
 
 interface Props {
-  style ?: any,
-  testID ?: any,
-  accessibilityLabel ?: any,
-  onPress ?: any,
-  onPressIn ?: any,
-  onPressOut ?: any,
-  onLongPress ?: any,
-  activeOpacity ?: any,
-  delayLongPress ?: any,
-  delayPressIn ?: any,
-  delayPressOut ?: any,
-  disabled ?: any,
-  isLoading ?: any,
-  activityIndicatorColor ?: any,
-  textStyle ?: any,
-  allowFontScaling ?: any,
+  style ?: any;
+  testID ?: any;
+  accessibilityLabel ?: any;
+  onPress ?: any;
+  onPressIn ?: any;
+  onPressOut ?: any;
+  onLongPress ?: any;
+  activeOpacity ?: any;
+  delayLongPress ?: any;
+  delayPressIn ?: any;
+  delayPressOut ?: any;
+  disabled ?: any;
+  isLoading ?: any;
+  activityIndicatorColor ?: any;
+  textStyle ?: any;
+  allowFontScaling ?: any;
 }
 
 export default class Button extends PureComponent<Props> {

@@ -1,7 +1,8 @@
 import * as Type from '../actions/type';
+import { UserState } from '../actions/user';
 
-const defaultState = {
-  isLogin: false,
+const defaultState : UserState = {
+  username: '',
   token:''
 }
 
@@ -11,7 +12,7 @@ export default (state = defaultState, action:any) => {
     case Type.UPDATE_USER:
       return {
         ...state,
-        isLogin: true,
+        username: action.username,
         token:action.token
       }
     case Type.RESET_USER:
