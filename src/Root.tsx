@@ -15,43 +15,31 @@ import Found from "./pages/Found/Found";
 import Mine from "./pages/Mine/Mine";
 import Test from "./pages/Test/Test";
   
-  
 const MainTab = createBottomTabNavigator(
   {
     Home: {
-      screen: createStackNavigator({
-        Home
-      },
-      {
-        headerLayoutPreset: "center"
-      }),
-      navigationOptions: props => {
+      screen: createStackNavigator({Home}),
+      navigationOptions: () => {
         return {
-          tabBarIcon: ({ tintColor, focused }) => (
-            <Iconfont size={20} name="home" color={tintColor} />
-          ),
-          tabBarLabel: "首页"
+          header:null,
+          tabBarLabel: "首页",
         };
       }
     },
     Found: {
-      screen: Found,
-      navigationOptions: props => {
+      screen: createStackNavigator({Found}),
+      navigationOptions: () => {
         return {
-          tabBarIcon: ({ tintColor, focused }) => (
-            <Iconfont size={20} name="search" color={tintColor} />
-          ),
+          header:null,
           tabBarLabel: "发现"
         };
       }
     },
     Mine: {
-      screen: Mine,
-      navigationOptions: props => {
+      screen: createStackNavigator({Mine}),
+      navigationOptions: () => {
         return {
-          tabBarIcon: ({ tintColor, focused }) => (
-            <Iconfont size={20} name="user" color={tintColor}/>
-          ),
+          header:null,
           tabBarLabel: "我的"
         };
       }
@@ -63,20 +51,39 @@ const MainTab = createBottomTabNavigator(
       activeTintColor: "#2860a7",
       inactiveTintColor: "#66717c"
     },
-
-    navigationOptions: {
+    defaultNavigationOptions:({ navigation })=>({
       header: null,
-      headerLayoutPreset: "center"
-    }
+      headerLayoutPreset: "center",
+      tabBarIcon: ({ focused, horizontal, tintColor }) => {
+        const { routeName } = navigation.state;
+        let iconName : string = "";
+        let iconColor : string = tintColor || "#000";
+        if(routeName == 'Home'){
+          iconName = "home";
+        }else if(routeName == 'Found'){
+          iconName = "search";
+        }else if(routeName == 'Mine'){
+          iconName = "user";
+        }
+        return <Iconfont size={20} name={iconName} color={iconColor}/>
+      }
+    })
+    
   }
 );
+
+MainTab.navigationOptions = {
+  header:null
+}
 
 const AuthRouter = createStackNavigator(
   {
     Login
   },
   {
-    headerLayoutPreset: "center"
+    defaultNavigationOptions: {
+      header: null
+    }
   }
 );
 
@@ -88,12 +95,11 @@ const AppRouter = createStackNavigator(
     Test
   },
   {
+    initialRouteName: "MainTab",
     headerMode: "screen",
-    navigationOptions: {
-      header: null,
-      headerLayoutPreset: "center"
+    defaultNavigationOptions: {
+      header: null
     },
-    initialRouteName: "MainTab"
   }
 );
 
@@ -117,7 +123,7 @@ class App extends PureComponent {
   }
 }
 
-const mapStateToProps = state => (
+const mapStateToProps = (state:any) => (
   {
     stackReducer: state.stackReducer
   }

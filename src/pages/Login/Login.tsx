@@ -1,20 +1,26 @@
 import React, { PureComponent } from 'react';
 import { View, Text } from 'react-native';
-import { SafeAreaView } from 'react-navigation';
+import { SafeAreaView,NavigationScreenProps } from 'react-navigation';
 import { connect } from 'react-redux'
 
 import styles from "./LoginStyles";
 import Button from '../../components/Button/Button';
 import {login} from '../../actions/user'
+import Header from '../../components/Header/Header';
 
-class Login extends PureComponent {
-  static navigationOptions = props => {
+interface Props {
+  login:any
+}
+interface State {}
+
+class Login extends PureComponent<Props & NavigationScreenProps,State> {
+  static navigationOptions = () => {
     return {
-      headerTitle: "Login"
+      header:<Header headerTitle="Login"/>
     }
   }
 
-  state = {
+  state:State = {
 
   }
 
@@ -23,7 +29,7 @@ class Login extends PureComponent {
     this.props.login();
   }
 
-  componentWillReceiveProps(nextProps){
+  componentWillReceiveProps(nextProps:any){
     console.log('nextProps',nextProps);
   }
 
@@ -36,7 +42,7 @@ class Login extends PureComponent {
   }
 }
 
-export default connect((state) => {
+export default connect((state:any) => {
   let { userReducer,stackReducer } = state;
   return {
       userReducer,

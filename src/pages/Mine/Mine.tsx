@@ -1,18 +1,21 @@
 import React, { PureComponent } from 'react';
 import { View, Text } from 'react-native';
-import { SafeAreaView } from 'react-navigation';
+import { SafeAreaView,NavigationScreenProps } from 'react-navigation';
 
 import styles from "./MineStyles";
+import Header from '../../components/Header/Header';
 
+interface Props {}
+interface State {}
 
-export default class Mine extends PureComponent {
-  static navigationOptions = props => {
+export default class Mine extends PureComponent<Props & NavigationScreenProps,State> {
+  static navigationOptions = () => {
     return {
-      headerTitle: "Mine"
+      header:<Header headerTitle='Mine'/>
     }
   }
 
-  state = {
+  state:State = {
 
   }
 

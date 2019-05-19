@@ -2,7 +2,26 @@ import React, { PureComponent } from "react";
 import { TouchableOpacity, ActivityIndicator, Text } from "react-native";
 import styles from "./ButtonStyles";
 
-export default class Button extends PureComponent {
+interface Props {
+  style ?: any,
+  testID ?: any,
+  accessibilityLabel ?: any,
+  onPress ?: any,
+  onPressIn ?: any,
+  onPressOut ?: any,
+  onLongPress ?: any,
+  activeOpacity ?: any,
+  delayLongPress ?: any,
+  delayPressIn ?: any,
+  delayPressOut ?: any,
+  disabled ?: any,
+  isLoading ?: any,
+  activityIndicatorColor ?: any,
+  textStyle ?: any,
+  allowFontScaling ?: any,
+}
+
+export default class Button extends PureComponent<Props> {
 
   renderChildren() {
     if (this.props.isLoading) {
@@ -10,12 +29,11 @@ export default class Button extends PureComponent {
         <ActivityIndicator
           animating={true}
           size='small'
-          style={styles.loading}
           color={this.props.activityIndicatorColor || '#c0c0c0'}
         />
       )
     }
-    let childElements = [];
+    let childElements:any[] = [];
     React.Children.forEach(this.props.children, item => {
       if (typeof item === 'string' || typeof item === 'number') {
         const element = (
@@ -35,7 +53,7 @@ export default class Button extends PureComponent {
   }
 
   render() {
-    let { testID, accessibilityLabel, onPress, onPressIn, onPressOut, onLongPress, activeOpacity, delayLongPress, delayPressIn, delayPressOut, disabled, isLoading } = this.props
+    let { style ,testID, accessibilityLabel, onPress, onPressIn, onPressOut, onLongPress, activeOpacity, delayLongPress, delayPressIn, delayPressOut, disabled, isLoading } = this.props
     activeOpacity = activeOpacity ? activeOpacity : 0.5
     if (isLoading) {
       disabled = true
@@ -56,7 +74,7 @@ export default class Button extends PureComponent {
     return (
       <TouchableOpacity
         {...touchableProps}
-        style={[styles.Button, this.props.style]}
+        style={[styles.Button, style]}
         >
         {this.renderChildren()}
       </TouchableOpacity>
