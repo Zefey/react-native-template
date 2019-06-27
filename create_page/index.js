@@ -18,19 +18,14 @@ import { View, Text } from 'react-native'
 import { SafeAreaView,NavigationScreenProps } from 'react-navigation'
 
 import styles from './${pageName}Styles'
-import Header from '../../components/Header/Header';
-import HeaderLeft from '../../components/HeaderLeft/HeaderLeft'
 
 interface Props {}
 interface State {}
 
 export default class ${pageName} extends PureComponent<Props & NavigationScreenProps,State> {
-  static navigationOptions = (props:any) => {
+  static navigationOptions = () => {
     return {
-      header:<Header 
-                headerTitle='${pageName}'
-                headerLeft={<HeaderLeft onPress={() => {props.navigation.goBack()}}/>}
-              />
+      headerTitle:'${pageName}'
     }
   }
 
@@ -48,7 +43,6 @@ export default class ${pageName} extends PureComponent<Props & NavigationScreenP
 
 // 样式文件
 const stylesTep = `import { StyleSheet } from 'react-native'
-import rpx from '../../utils/rpx'
 
 export default StyleSheet.create({
   container: {

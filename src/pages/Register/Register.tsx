@@ -1,35 +1,27 @@
 import React, { PureComponent } from 'react'
 import { View, Text } from 'react-native'
 import { SafeAreaView,NavigationScreenProps } from 'react-navigation'
-import withReducerState from '../../store/withReducerState'
 
-import styles from './TestStyles'
+import styles from './RegisterStyles'
 
 interface Props {}
 interface State {}
 
-class Test extends PureComponent<Props & NavigationScreenProps,State> {
+export default class Register extends PureComponent<Props & NavigationScreenProps,State> {
   static navigationOptions = () => {
     return {
-      headerTitle:'Test' 
+      headerTitle:'Register' 
     }
   }
 
   state:State={
-
-  }
-
-  componentDidMount(){
-    console.log(this.props);
   }
   
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <Text style={{color: '#000'}}>Test</Text>
+        <Text style={{color: '#000'}}>Register</Text>
       </SafeAreaView>
     )
   }
 }
-
-export default withReducerState(Test)

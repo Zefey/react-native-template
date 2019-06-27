@@ -11,14 +11,14 @@ export const login = (data : any) => (dispatch : any) => {
   setTimeout(() => {
     /**模拟api返回数据 */
     let resData : UserState = {
-      token:'asd1123asdwqe123k123asdwqe',
-      username:'Test'
+      token:Math.random().toString(12).substr(2),
+      username:'Zefey'
     }
     return dispatch({
       type: Type.UPDATE_USER,
       ...resData
     });
-  }, 2000);
+  }, 1000);
   
 }
 

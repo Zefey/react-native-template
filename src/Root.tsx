@@ -3,43 +3,70 @@ import {
     createStackNavigator,
     createAppContainer,
     createBottomTabNavigator,
-    createSwitchNavigator
+    createSwitchNavigator,
+    NavigationScreenProps
 } from "react-navigation";
 import Iconfont from './components/Iconfont/Iconfont'
-import { connect } from 'react-redux'
+import StackViewStyleInterpolator from 'react-navigation-stack/src/views/StackView/StackViewStyleInterpolator';
 
 //page
 import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
 import Home from "./pages/Home/Home";
 import Found from "./pages/Found/Found";
 import Mine from "./pages/Mine/Mine";
 import Test from "./pages/Test/Test";
+
+const TransitionConfiguration = () => ({
+  screenInterpolator: (sceneProps:any) => {
+      const {scene} = sceneProps;
+      const {route} = scene;
+      // 获取屏幕切换时新屏幕的参数
+      const params = route.params || {};
+      // 看看参数中是否有 transition 参数，有则使用，否则使用缺省值 forHorizontal
+      // forHorizontal 表示从右向左滑出
+      const transition = params.transition || 'forHorizontal';
+      let InterpolatorType:any = StackViewStyleInterpolator;
+      return InterpolatorType[transition](sceneProps);
+  },
+});
+
+const NavigationOptionsConfig:any = {
+  headerLayoutPreset: "center",
+  headerMode: 'float',
+  transitionConfig: TransitionConfiguration,
+  defaultNavigationOptions: {
+    headerBackTitle: null,
+    gesturesEnabled:true,
+    headerTintColor: "#000",
+    headerStyle: {
+      backgroundColor:"#fff"
+    }
+  }
+}
   
 const MainTab = createBottomTabNavigator(
   {
     Home: {
-      screen: createStackNavigator({Home}),
+      screen: createStackNavigator({Home},NavigationOptionsConfig),
       navigationOptions: () => {
         return {
-          header:null,
           tabBarLabel: "首页",
         };
       }
     },
     Found: {
-      screen: createStackNavigator({Found}),
+      screen: createStackNavigator({Found},NavigationOptionsConfig),
       navigationOptions: () => {
         return {
-          header:null,
           tabBarLabel: "发现"
         };
       }
     },
     Mine: {
-      screen: createStackNavigator({Mine}),
+      screen: createStackNavigator({Mine},NavigationOptionsConfig),
       navigationOptions: () => {
         return {
-          header:null,
           tabBarLabel: "我的"
         };
       }
@@ -47,14 +74,16 @@ const MainTab = createBottomTabNavigator(
   },
   {
     initialRouteName:'Home',
+    lazy: true,
+    backBehavior:'none',
+    tabBarPosition: 'bottom',
+    swipeEnabled: false,
     tabBarOptions: {
       activeTintColor: "#2860a7",
       inactiveTintColor: "#66717c"
     },
-    defaultNavigationOptions:({ navigation })=>({
-      header: null,
-      headerLayoutPreset: "center",
-      tabBarIcon: ({ focused, horizontal, tintColor }) => {
+    defaultNavigationOptions:({ navigation }:any)=>({
+      tabBarIcon: ({ focused, horizontal, tintColor }:any) => {
         const { routeName } = navigation.state;
         let iconName : string = "";
         let iconColor : string = tintColor || "#000";
@@ -65,7 +94,7 @@ const MainTab = createBottomTabNavigator(
         }else if(routeName == 'Mine'){
           iconName = "user";
         }
-        return <Iconfont size={20} name={iconName} color={iconColor}/>
+        return <Iconfont size={24} name={iconName} color={iconColor}/>
       }
     })
     
@@ -76,31 +105,34 @@ MainTab.navigationOptions = {
   header:null
 }
 
+// MainTab.navigationOptions = ({
+//   navigation
+// }: NavigationScreenProps) => {
+//   const { routeName } = navigation.state.routes[navigation.state.index];
+//   const headerTitle = routeName;
+//   return {
+//     headerTitle
+//   };
+// };
+
+
 const AuthRouter = createStackNavigator(
   {
-    Login
+    Login,
+    Register
   },
-  {
-    defaultNavigationOptions: {
-      header: null
-    }
-  }
+  NavigationOptionsConfig
 );
 
 
-const AppRouter = createStackNavigator(
+export const AppRouter = createStackNavigator(
   {
     MainTab,
     Login,
+    Register,
     Test
   },
-  {
-    initialRouteName: "MainTab",
-    headerMode: "screen",
-    defaultNavigationOptions: {
-      header: null
-    },
-  }
+  NavigationOptionsConfig
 );
 
 export const MyRouter = createAppContainer(
@@ -110,25 +142,14 @@ export const MyRouter = createAppContainer(
       AppRouter
     },
     {
-      backBehavior: "none",
       initialRouteName: "AuthRouter"
     },
   )
 );
 
 
-class App extends PureComponent {
+export default class App extends PureComponent {
   render() {
-    return <MyRouter />
+    return <MyRouter screenProps={this.props}/>
   }
 }
-
-const mapStateToProps = (state:any) => (
-  {
-    stackReducer: state.stackReducer
-  }
-)
-
-
-export default connect(mapStateToProps)(App);
-  

@@ -1,14 +1,11 @@
 import React, { PureComponent } from 'react';
-import { View, Text, Platform, Alert } from 'react-native';
+import { View, Text, Platform, Alert, TouchableOpacity } from 'react-native';
 import { SafeAreaView,NavigationScreenProps } from 'react-navigation';
-import { connect } from 'react-redux'
+import withReducerState from '../../store/withReducerState'
 
 import styles from "./HomeStyles";
-import Header from '../../components/Header/Header';
-import HeaderRight from '../../components/HeaderRight/HeaderRight';
 import Button from '../../components/Button/Button';
 import Iconfont from "../../components/Iconfont/Iconfont";
-import rpx from '../../utils/rpx';
 import {UserState} from '../../actions/user'
 
 interface Props {
@@ -17,15 +14,13 @@ interface Props {
 interface State {}
 
 class Home extends PureComponent<Props & NavigationScreenProps,State> {
-  
-  static navigationOptions = (props:any) => {
+  static navigationOptions = () => {
     return {
-      header:<Header 
-              headerTitle="Home"
-              headerRight={
-              <HeaderRight onPress={()=>{Alert.alert(Platform.OS.toUpperCase())}}>
-                <Iconfont name={Platform.OS == 'android' ? 'android' : 'apple'} size={rpx(40)} />
-              </HeaderRight>}/>
+      headerTitle:'Home',
+      headerRight:
+        <TouchableOpacity style={styles.headerItem} onPress={()=>{Alert.alert(Platform.OS.toUpperCase())}}>
+          <Iconfont name={Platform.OS == 'android' ? 'android' : 'apple'} size={26} />
+        </TouchableOpacity>
     }
   }
 
@@ -49,10 +44,4 @@ class Home extends PureComponent<Props & NavigationScreenProps,State> {
   }
 }
 
-export default connect((state:any) => {
-  let { userReducer,stackReducer } = state;
-  return {
-      userReducer,
-      stackReducer
-  }
-})(Home)
+export default withReducerState(Home)

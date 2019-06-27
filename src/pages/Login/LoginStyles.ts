@@ -1,9 +1,15 @@
 import { StyleSheet } from "react-native";
-import rpx from "../../utils/rpx";
 
 export default StyleSheet.create({
     container: {
       flex: 1,
-      padding:rpx(40)
+      padding:20
+    },
+    buttonView:{
+      flexDirection:'row',
+      justifyContent: 'space-around'
+    },
+    button:{
+      width:150
     }
 })
