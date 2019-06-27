@@ -1,15 +1,17 @@
 import { StyleSheet } from "react-native";
-import rpx from "../../utils/rpx";
 
 export default StyleSheet.create({
     container: {
       flex: 1,
-      padding:rpx(40)
+      padding:20
     },
     text:{
       color:"#000",
-      fontSize: rpx(30),
+      fontSize: 15,
       fontWeight: '500',
-      paddingBottom:rpx(20)
+      paddingBottom:10
+    },
+    headerItem:{
+      marginHorizontal:10
     }
 })

@@ -3,7 +3,6 @@ import { View, Text } from 'react-native';
 import { SafeAreaView,NavigationScreenProps } from 'react-navigation';
 
 import styles from "./MineStyles";
-import Header from '../../components/Header/Header';
 
 interface Props {}
 interface State {}
@@ -11,7 +10,7 @@ interface State {}
 export default class Mine extends PureComponent<Props & NavigationScreenProps,State> {
   static navigationOptions = () => {
     return {
-      header:<Header headerTitle='Mine'/>
+      header:null
     }
   }
 

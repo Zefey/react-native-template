@@ -7,11 +7,11 @@ import configureStore from "./store/configureStore";
 const store = configureStore({});
 
 export default class App extends PureComponent {
-  
+
   render() {
       return (
         <Provider store={store}>
-          <Root />
+          <Root {...this.props}/>
         </Provider>
       )
   }

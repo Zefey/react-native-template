@@ -6,7 +6,6 @@ import { connect } from 'react-redux'
 import styles from "./LoginStyles";
 import Button from '../../components/Button/Button';
 import {login,UserState} from '../../actions/user'
-import Header from '../../components/Header/Header';
 
 interface Props {
   login:any
@@ -18,7 +17,7 @@ interface State {
 class Login extends PureComponent<Props & NavigationScreenProps,State> {
   static navigationOptions = () => {
     return {
-      header:<Header headerTitle="Login"/>
+      headerTitle:'Login' 
     }
   }
 
@@ -38,12 +37,20 @@ class Login extends PureComponent<Props & NavigationScreenProps,State> {
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <Button 
-          isLoading={this.state.loading}
-          onPress={()=>{
-            this.props.login();
-            this.setState({loading:true});
-          }}>模拟登录</Button>
+        <View style={styles.buttonView}>
+          <Button 
+            style={styles.button}
+            isLoading={this.state.loading}
+            onPress={()=>{
+              this.props.login();
+              this.setState({loading:true});
+            }}>模拟登录</Button>
+            <Button 
+              style={styles.button}
+              onPress={()=>{
+                this.props.navigation.navigate('Register');
+              }}>注册</Button>
+        </View>
       </SafeAreaView>
     )
   }
