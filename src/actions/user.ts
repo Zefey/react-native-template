@@ -5,7 +5,7 @@ export interface UserState {
   username : string;
 }
 
-export const login = (data : any) => (dispatch : any) => {
+export const login = (data:any,callback:object) => (dispatch : any) => {
 
   /**模拟异步 */
   setTimeout(() => {
@@ -14,6 +14,7 @@ export const login = (data : any) => (dispatch : any) => {
       token:Math.random().toString(12).substr(2),
       username:'Zefey'
     }
+    typeof callback === 'function' && callback(resData);
     return dispatch({
       type: Type.UPDATE_USER,
       ...resData

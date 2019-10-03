@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { SafeAreaView,NavigationScreenProps } from 'react-navigation';
 import { connect } from 'react-redux'
 
@@ -25,15 +25,6 @@ class Login extends PureComponent<Props & NavigationScreenProps,State> {
     loading:false
   }
 
-  componentWillReceiveProps(nextProps:any){
-    console.log('nextProps',nextProps);
-    let userInfo:UserState = nextProps.userReducer;
-    if(userInfo.token){
-      this.setState({loading:false});
-      this.props.navigation.navigate('MainTab');
-    }
-  }
-
   render() {
     return (
       <SafeAreaView style={styles.container}>
@@ -42,7 +33,13 @@ class Login extends PureComponent<Props & NavigationScreenProps,State> {
             style={styles.button}
             isLoading={this.state.loading}
             onPress={()=>{
-              this.props.login();
+              let data = {};
+              this.props.login(data,(res:any)=>{
+                if(res.token){
+                  this.setState({loading:false});
+                  this.props.navigation.navigate('MainTab');
+                }
+              });
               this.setState({loading:true});
             }}>模拟登录</Button>
             <Button 

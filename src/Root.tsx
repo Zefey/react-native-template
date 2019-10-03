@@ -86,7 +86,6 @@ const MainTab = createBottomTabNavigator(
       tabBarIcon: ({ focused, horizontal, tintColor }:any) => {
         const { routeName } = navigation.state;
         let iconName : string = "";
-        let iconColor : string = tintColor || "#000";
         if(routeName == 'Home'){
           iconName = "home";
         }else if(routeName == 'Found'){
@@ -94,7 +93,7 @@ const MainTab = createBottomTabNavigator(
         }else if(routeName == 'Mine'){
           iconName = "user";
         }
-        return <Iconfont size={24} name={iconName} color={iconColor}/>
+        return <Iconfont size={24} name={iconName} color={tintColor}/>
       }
     })
     
@@ -104,17 +103,6 @@ const MainTab = createBottomTabNavigator(
 MainTab.navigationOptions = {
   header:null
 }
-
-// MainTab.navigationOptions = ({
-//   navigation
-// }: NavigationScreenProps) => {
-//   const { routeName } = navigation.state.routes[navigation.state.index];
-//   const headerTitle = routeName;
-//   return {
-//     headerTitle
-//   };
-// };
-
 
 const AuthRouter = createStackNavigator(
   {
