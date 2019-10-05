@@ -1,11 +1,17 @@
 import React,{PureComponent} from "react";
+import {BackHandler,ToastAndroid} from "react-native";
+import { connect } from "react-redux";
 import {
     createStackNavigator,
     createAppContainer,
     createBottomTabNavigator,
     createSwitchNavigator,
-    NavigationScreenProps
+    NavigationScreenProps,
+    NavigationActions
 } from "react-navigation";
+import {
+  createReduxContainer
+} from 'react-navigation-redux-helpers' 
 import Iconfont from './components/Iconfont/Iconfont'
 import StackViewStyleInterpolator from 'react-navigation-stack/src/views/StackView/StackViewStyleInterpolator';
 
@@ -44,32 +50,23 @@ const NavigationOptionsConfig:any = {
     }
   }
 }
+
+const TabData:any = {
+    Home:{label:'首页',icon:'home'},
+    Found:{label:'发现',icon:'search'},
+    Mine:{label:'我的',icon:'user'}
+}
   
 const MainTab = createBottomTabNavigator(
   {
     Home: {
-      screen: createStackNavigator({Home},NavigationOptionsConfig),
-      navigationOptions: () => {
-        return {
-          tabBarLabel: "首页",
-        };
-      }
+      screen: createStackNavigator({Home},NavigationOptionsConfig)
     },
     Found: {
-      screen: createStackNavigator({Found},NavigationOptionsConfig),
-      navigationOptions: () => {
-        return {
-          tabBarLabel: "发现"
-        };
-      }
+      screen: createStackNavigator({Found},NavigationOptionsConfig)
     },
     Mine: {
-      screen: createStackNavigator({Mine},NavigationOptionsConfig),
-      navigationOptions: () => {
-        return {
-          tabBarLabel: "我的"
-        };
-      }
+      screen: createStackNavigator({Mine},NavigationOptionsConfig)
     }
   },
   {
@@ -82,20 +79,16 @@ const MainTab = createBottomTabNavigator(
       activeTintColor: "#2860a7",
       inactiveTintColor: "#66717c"
     },
-    defaultNavigationOptions:({ navigation }:any)=>({
-      tabBarIcon: ({ focused, horizontal, tintColor }:any) => {
+    defaultNavigationOptions:({ navigation }:NavigationScreenProps)=>{
         const { routeName } = navigation.state;
-        let iconName : string = "";
-        if(routeName == 'Home'){
-          iconName = "home";
-        }else if(routeName == 'Found'){
-          iconName = "search";
-        }else if(routeName == 'Mine'){
-          iconName = "user";
-        }
-        return <Iconfont size={24} name={iconName} color={tintColor}/>
+        let {label,icon} = TabData[routeName];
+        return {
+          tabBarLabel:label,
+          tabBarIcon: ({ focused, tintColor }:any) => {
+            return <Iconfont size={24} name={icon} color={tintColor}/>
+          }
       }
-    })
+    }
     
   }
 );
@@ -113,18 +106,15 @@ const AuthRouter = createStackNavigator(
 );
 
 
-export const AppRouter = createStackNavigator(
+const AppRouter = createStackNavigator(
   {
     MainTab,
-    Login,
-    Register,
     Test
   },
   NavigationOptionsConfig
 );
 
-export const MyRouter = createAppContainer(
-  createSwitchNavigator(
+export const MyRouter = createSwitchNavigator(
     {
       AuthRouter,
       AppRouter
@@ -133,11 +123,48 @@ export const MyRouter = createAppContainer(
       initialRouteName: "AuthRouter"
     },
   )
-);
 
+const ReduxRouter = createReduxContainer(MyRouter);
 
-export default class App extends PureComponent {
+interface Props {
+  nav:any
+  dispatch:any
+}
+
+class App extends PureComponent<Props> {
+
+  lastBackPressed:any;
+
+  componentDidMount() {
+      BackHandler.addEventListener("hardwareBackPress", this.onBackPress);
+  }
+
+  componentWillUnmount() {
+      BackHandler.removeEventListener("hardwareBackPress", this.onBackPress);
+      this.lastBackPressed = null;
+  }
+  onBackPress = () => {
+      const { dispatch, nav } = this.props;
+      if (nav.index === 0) {
+          if (this.lastBackPressed && this.lastBackPressed + 2000 >= Date.now()) {
+              return false;
+          }
+          this.lastBackPressed = Date.now();
+          ToastAndroid.show('再按一次退出应用', ToastAndroid.SHORT);
+      }
+      dispatch(NavigationActions.back());
+      return true;
+  };
   render() {
-    return <MyRouter screenProps={this.props}/>
+      const { dispatch, nav } = this.props;
+      return (
+          <ReduxRouter state={nav} dispatch={dispatch}/>
+      );
   }
 }
+
+const mapStateToProps = (state:any) => ({
+  nav: state.nav,
+});
+
+export default connect(mapStateToProps)(App);

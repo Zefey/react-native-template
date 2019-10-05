@@ -1,5 +1,4 @@
 import React, { PureComponent } from "react"
-import { StatusBar } from 'react-native'
 import { Provider } from 'react-redux'
 import SplashScreen from 'react-native-splash-screen'
 
@@ -17,10 +16,6 @@ if (!__DEV__) {
     error: () => {},
   };
 }
-//设置 StatusBar
-// StatusBar.setBarStyle('dark-content');
-// StatusBar.setBackgroundColor('transparent');
-// StatusBar.setTranslucent(true);
 
 export default class App extends PureComponent {
 

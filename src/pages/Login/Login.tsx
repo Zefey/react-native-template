@@ -54,9 +54,9 @@ class Login extends PureComponent<Props & NavigationScreenProps,State> {
 }
 
 export default connect((state:any) => {
-  let { userReducer,stackReducer } = state;
+  let { userReducer,nav } = state;
   return {
       userReducer,
-      stackReducer
+      nav
   }
 },{login})(Login)

@@ -1,8 +1,8 @@
 import { connect } from "react-redux";
 
-const mapStateToProps = ({ userReducer,stackReducer }: any) => ({
+const mapStateToProps = ({ userReducer,nav }: any) => ({
   userReducer,
-  stackReducer
+  nav
 });
 
 const mapDispatchToProps = {};
