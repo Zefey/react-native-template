@@ -20,6 +20,7 @@ if (!__DEV__) {
 export default class App extends PureComponent {
 
   componentDidMount(){
+    console.log('SplashScreen',SplashScreen)
     SplashScreen.hide();
   }
 
