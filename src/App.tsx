@@ -27,7 +27,7 @@ export default class App extends PureComponent {
   render() {
       return (
         <Provider store={store}>
-          <Root {...this.props}/>
+          <Root />
         </Provider>
       )
   }
