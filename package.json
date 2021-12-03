@@ -15,7 +15,7 @@
   "dependencies": {
     "@react-native-community/toolbar-android": "^0.1.0-rc.2",
     "react": "16.13.1",
-    "react-native": "0.63.2",
+    "react-native": "0.64.1",
     "react-native-gesture-handler": "^1.0.10",
     "react-native-root-modal": "^5.0.0",
     "react-native-root-toast": "^3.1.2",
