@@ -1,6 +1,4 @@
-import {
-    StyleSheet, View, Animated, BackHandler,
-} from 'react-native';
+import { StyleSheet, View, Animated, BackHandler } from 'react-native';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
@@ -53,7 +51,7 @@ class ModalContainer extends Component {
             return true;
         }
         return false;
-    }
+    };
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
         if (this.once && !nextProps.visible && this.realod) {
@@ -90,10 +88,7 @@ class ModalContainer extends Component {
     render() {
         const { props } = this;
         return this.state.visible ? (
-            <View
-              {...props}
-              style={props.style || styles.defaultModalStyle}
-            />
+            <View {...props} style={props.style || styles.defaultModalStyle} />
         ) : null;
     }
 }
@@ -104,10 +99,7 @@ export class AnimatedModalContainer extends ModalContainer {
         console.log(this.state.visible);
         const { props } = this;
         return this.state.visible ? (
-            <Animated.View
-              {...props}
-              style={props.style || styles.defaultModalStyle}
-            />
+            <Animated.View {...props} style={props.style || styles.defaultModalStyle} />
         ) : null;
     }
 }

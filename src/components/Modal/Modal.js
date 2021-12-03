@@ -11,18 +11,12 @@ class Modal extends Component {
     };
 
     _getContent(Container, props) {
-        return (
-            <Container
-                {...props}
-            />
-        );
+        return <Container {...props} />;
     }
 
     render() {
         return (
-            <RootSiblingPortal>
-                {this._getContent(ModalContainer, this.props)}
-            </RootSiblingPortal>
+            <RootSiblingPortal>{this._getContent(ModalContainer, this.props)}</RootSiblingPortal>
         );
     }
 }
@@ -45,9 +39,6 @@ class AnimatedModal extends Modal {
     }
 }
 
-export {
-    RootSiblings as ModalManager,
-    AnimatedModal,
-};
+export { RootSiblings as ModalManager, AnimatedModal };
 
 export default Modal;
