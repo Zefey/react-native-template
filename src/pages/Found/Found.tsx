@@ -1,29 +1,26 @@
 import React, { PureComponent } from 'react';
-import { View, Text } from 'react-native';
-import { SafeAreaView,NavigationScreenProps } from 'react-navigation';
+import { Text } from 'react-native';
+import { SafeAreaView, NavigationScreenProps } from 'react-navigation';
 
-import styles from "./FoundStyles";
+import styles from './FoundStyles';
 
 interface Props {}
 interface State {}
 
-export default class Found extends PureComponent<Props & NavigationScreenProps,State> {
-  
-  static navigationOptions = () => {
-    return {
-      headerTitle:'Found'
+export default class Found extends PureComponent<Props & NavigationScreenProps, State> {
+    static navigationOptions = () => {
+        return {
+            headerTitle: 'Found',
+        };
+    };
+
+    state: State = {};
+
+    render() {
+        return (
+            <SafeAreaView style={styles.container}>
+                <Text>Found</Text>
+            </SafeAreaView>
+        );
     }
-  }
-
-  state:State = {
-
-  }
-
-  render() {
-    return (
-      <SafeAreaView style={styles.container}>
-        <Text>Found</Text>
-      </SafeAreaView>
-    )
-  }
 }

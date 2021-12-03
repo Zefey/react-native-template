@@ -7,54 +7,49 @@
  */
 
 import React, { PureComponent } from 'react';
-import {
-    View,
-    StyleSheet,
-    TouchableOpacity,
-    Text,
-} from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import Modal from '../Modal/Modal';
 import * as ScreenUtil from '../../utils/ScreenUtil';
 
-interface Props {
-}
+interface Props {}
 
 interface State {
-    isVisible : boolean;
-    options ?: Object[];
-    onPicker ?: Function,
-    onCannel ?: Function
+    isVisible: boolean;
+    options?: Object[];
+    onPicker?: Function;
+    onCannel?: Function;
 }
 
-export default class ActionSheepModal extends PureComponent<Props,State> {
-
-    state:State = {
+export default class ActionSheepModal extends PureComponent<Props, State> {
+    state: State = {
         isVisible: false,
-        options:[],
-        onPicker:()=>{},
-        onCannel:()=>{}
-    }
+        options: [],
+        onPicker: () => {},
+        onCannel: () => {},
+    };
 
-    showModal = (data = {
-        options:[],
-        onPicker:()=>{},
-        onCannel:()=>{}
-    }) => {
+    showModal = (
+        data = {
+            options: [],
+            onPicker: () => {},
+            onCannel: () => {},
+        },
+    ) => {
         this.setState({
-            isVisible:true,
-            ...data
-        })
-    }
+            isVisible: true,
+            ...data,
+        });
+    };
 
     hideModal = () => {
         this.setState({
-            isVisible:false
-        })
-    }
+            isVisible: false,
+        });
+    };
 
     render() {
-        const { isVisible,options,onPicker,onCannel } = this.state;
-        
+        const { isVisible, options, onPicker, onCannel } = this.state;
+
         return (
             <Modal
                 visible={isVisible}
@@ -63,64 +58,76 @@ export default class ActionSheepModal extends PureComponent<Props,State> {
             >
                 <View style={styles.modalContainer}>
                     <View style={styles.contentView}>
-                        <View style={{
-                            backgroundColor:'rgba(255,255,255,.9)',
-                            marginHorizontal:ScreenUtil.scaleSize(10),
-                            borderRadius:ScreenUtil.scaleSize(12),
-                            overflow:'hidden'
-                        }}>
-                            {options && options.map((item:any,index:number)=>{
-                                const isLastItem = index == options.length - 1;
-                                return (
-                                    <TouchableOpacity 
-                                        key={index}
-                                        activeOpacity={1}
-                                        onPress={()=>{
-                                            this.hideModal();
-                                            onPicker && onPicker(item);
-                                        }}
-                                        style={{
-                                            height:ScreenUtil.scaleSize(50),
-                                            justifyContent:'center',
-                                            alignItems: 'center',
-                                            borderBottomWidth:isLastItem ? 0 : 1,
-                                            borderBottomColor:'#CDCED2'
-                                        }}>
-                                        <Text style={{
-                                            fontSize:ScreenUtil.setSpText(16),
-                                            color:'#0076FF',
-                                            fontWeight:'500',
-                                            lineHeight:ScreenUtil.scaleSize(24),
-                                            textAlign:'center'
-                                        }}>{item.name || item}</Text>
-                                    </TouchableOpacity>
-                                )
-                            })}
+                        <View
+                            style={{
+                                backgroundColor: 'rgba(255,255,255,.9)',
+                                marginHorizontal: ScreenUtil.scaleSize(10),
+                                borderRadius: ScreenUtil.scaleSize(12),
+                                overflow: 'hidden',
+                            }}
+                        >
+                            {options &&
+                                options.map((item: any, index: number) => {
+                                    const isLastItem = index == options.length - 1;
+                                    return (
+                                        <TouchableOpacity
+                                            key={index}
+                                            activeOpacity={1}
+                                            onPress={() => {
+                                                this.hideModal();
+                                                onPicker && onPicker(item);
+                                            }}
+                                            style={{
+                                                height: ScreenUtil.scaleSize(50),
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                                borderBottomWidth: isLastItem ? 0 : 1,
+                                                borderBottomColor: '#CDCED2',
+                                            }}
+                                        >
+                                            <Text
+                                                style={{
+                                                    fontSize: ScreenUtil.setSpText(16),
+                                                    color: '#0076FF',
+                                                    fontWeight: '500',
+                                                    lineHeight: ScreenUtil.scaleSize(24),
+                                                    textAlign: 'center',
+                                                }}
+                                            >
+                                                {item.name || item}
+                                            </Text>
+                                        </TouchableOpacity>
+                                    );
+                                })}
                         </View>
-                        <TouchableOpacity 
+                        <TouchableOpacity
                             activeOpacity={1}
-                            onPress={()=>{
+                            onPress={() => {
                                 this.hideModal();
                                 onCannel && onCannel();
                             }}
                             style={{
-                                margin:ScreenUtil.scaleSize(10),
-                                backgroundColor:'#fff',
-                                height:ScreenUtil.scaleSize(50),
-                                borderRadius:ScreenUtil.scaleSize(12),
-                                justifyContent:'center',
+                                margin: ScreenUtil.scaleSize(10),
+                                backgroundColor: '#fff',
+                                height: ScreenUtil.scaleSize(50),
+                                borderRadius: ScreenUtil.scaleSize(12),
+                                justifyContent: 'center',
                                 alignItems: 'center',
-                            }}>
-                            <Text style={{
-                                fontSize:ScreenUtil.setSpText(16),
-                                color:'#0076FF',
-                                fontWeight:'500',
-                                lineHeight:ScreenUtil.scaleSize(24),
-                                textAlign:'center'
-                            }}>取消</Text>
+                            }}
+                        >
+                            <Text
+                                style={{
+                                    fontSize: ScreenUtil.setSpText(16),
+                                    color: '#0076FF',
+                                    fontWeight: '500',
+                                    lineHeight: ScreenUtil.scaleSize(24),
+                                    textAlign: 'center',
+                                }}
+                            >
+                                取消
+                            </Text>
                         </TouchableOpacity>
                     </View>
-                    
                 </View>
             </Modal>
         );
@@ -138,6 +145,6 @@ const styles = StyleSheet.create({
     },
     contentView: {
         width: ScreenUtil.screenW,
-        paddingBottom:ScreenUtil.bottomPadding
+        paddingBottom: ScreenUtil.bottomPadding,
     },
 });

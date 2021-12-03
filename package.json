@@ -40,6 +40,7 @@
     "@types/react-redux": "^7.0.9",
     "@types/redux-logger": "^3.0.6",
     "babel-jest": "^26.3.0",
+    "babel-plugin-module-resolver": "^4.1.0",
     "eslint": "^7.6.0",
     "husky": "^7.0.4",
     "jest": "^26.3.0",
@@ -62,7 +63,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged", 
+      "pre-commit": "lint-staged",
       "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS"
     }
   }

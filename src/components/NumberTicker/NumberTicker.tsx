@@ -7,38 +7,30 @@
  */
 
 import React, { PureComponent } from 'react';
-import {
-    Animated, Easing, StyleSheet, Text, View,
-} from 'react-native';
+import { Animated, Easing, StyleSheet, Text, View } from 'react-native';
 import TextTicker from './TextTicker';
 
 interface Props {
-    style : any;
-    textSize : number;
-    textStyle : any;
-    number : number;
-    duration : number;
+    style: any;
+    textSize: number;
+    textStyle: any;
+    number: number;
+    duration: number;
 }
 
-interface State {
-}
+interface State {}
 
-export default class NumberTicker extends PureComponent<Props,State> {
-
-    state:State = {
-
-    }
+export default class NumberTicker extends PureComponent<Props, State> {
+    state: State = {};
 
     render() {
-        const {
-            style, textSize, textStyle, number, duration,
-        } = this.props;
+        const { style, textSize, textStyle, number, duration } = this.props;
         const styles = generateStyles(textSize);
         return (
             <View style={style}>
                 <View style={{ flexDirection: 'row' }}>
                     {/* 数字先转为字符串再转数组 */}
-                    {(`${number}`).split('').map((item, index) => {
+                    {`${number}`.split('').map((item, index) => {
                         // 小数点处理
                         if (item === '.') {
                             return (
@@ -64,18 +56,17 @@ export default class NumberTicker extends PureComponent<Props,State> {
     }
 }
 
-
-
-const generateStyles = (textSize:any) => StyleSheet.create({
-    container: {
-        width: textSize * 0.62,
-        height: textSize,
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        overflow: 'hidden',
-    },
-    text: {
-        fontSize: textSize,
-        lineHeight: textSize,
-    },
-});
+const generateStyles = (textSize: any) =>
+    StyleSheet.create({
+        container: {
+            width: textSize * 0.62,
+            height: textSize,
+            alignItems: 'center',
+            justifyContent: 'flex-end',
+            overflow: 'hidden',
+        },
+        text: {
+            fontSize: textSize,
+            lineHeight: textSize,
+        },
+    });

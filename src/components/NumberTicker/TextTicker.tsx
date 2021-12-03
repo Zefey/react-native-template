@@ -1,4 +1,3 @@
-
 /**
  * @ Author: Zefey
  * @ Create Time: 2020-01-02 11:28:04
@@ -8,24 +7,22 @@
  */
 
 import React, { PureComponent } from 'react';
-import {
-    Animated, Easing, StyleSheet, Text, View,
-} from 'react-native';
+import { Animated, Easing, StyleSheet, Text, View } from 'react-native';
 
 interface Props {
-    targetNumber : any;
-    textSize : number;
-    textStyle : any;
-    duration : number;
+    targetNumber: any;
+    textSize: number;
+    textStyle: any;
+    duration: number;
 }
 
 interface State {
-    numberList : any;
-    animatedValue : any;
+    numberList: any;
+    animatedValue: any;
 }
 
-export default class TextTicker extends PureComponent<Props,State> {
-    constructor(props:Props) {
+export default class TextTicker extends PureComponent<Props, State> {
+    constructor(props: Props) {
         super(props);
         const numberList = [];
         for (let i = 0; i <= props.targetNumber; i++) {
@@ -70,7 +67,7 @@ export default class TextTicker extends PureComponent<Props,State> {
                         ],
                     }}
                 >
-                    {numberList.map((item:any, index:number) => (
+                    {numberList.map((item: any, index: number) => (
                         <Text key={index} style={[styles.text, textStyle]}>
                             {item}
                         </Text>
@@ -81,16 +78,17 @@ export default class TextTicker extends PureComponent<Props,State> {
     }
 }
 
-const generateStyles = (textSize:any) => StyleSheet.create({
-    container: {
-        width: textSize * 0.62,
-        height: textSize,
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        overflow: 'hidden',
-    },
-    text: {
-        fontSize: textSize,
-        lineHeight: textSize,
-    },
-});
+const generateStyles = (textSize: any) =>
+    StyleSheet.create({
+        container: {
+            width: textSize * 0.62,
+            height: textSize,
+            alignItems: 'center',
+            justifyContent: 'flex-end',
+            overflow: 'hidden',
+        },
+        text: {
+            fontSize: textSize,
+            lineHeight: textSize,
+        },
+    });

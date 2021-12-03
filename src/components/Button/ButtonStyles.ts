@@ -1,16 +1,14 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
-export default StyleSheet.create(
-  {
+export default StyleSheet.create({
     Button: {
-      backgroundColor: "#f2f3f4",
-      height: 50,
-      justifyContent: "center",
-      alignItems: "center"
+        backgroundColor: '#f2f3f4',
+        height: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     Text: {
-      color: "#1576da",
-      fontSize: 15
-    }
-  }
-)
+        color: '#1576da',
+        fontSize: 15,
+    },
+});
